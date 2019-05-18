@@ -6,6 +6,10 @@ BLAS = -DUSE_BLAS # Comment this out to disable openblas
 CXXFLAGS += $(OPENMP) $(BLAS) -std=c++11 -Wall -g -O2 -march=native #-fno-inline-functions -Og
 VG ?= valgrind --leak-check=yes
 
+gtest:
+	g++ tests/lucs.cc -I./include -lgtest -lpthread -o lucs-gtest
+	./lucs-gtest
+
 .PHONY: test unittest layertest
 # -- e.g. make unittest >/dev/null
 unittest: ut_tensor ut_blob ut_layer ut_graph
